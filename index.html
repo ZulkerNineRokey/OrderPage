@@ -1,0 +1,1569 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style data-tippy-stylesheet="">
+      .tippy-box[data-animation="fade"][data-state="hidden"] {
+        opacity: 0;
+      }
+      [data-tippy-root] {
+        max-width: calc(100vw - 10px);
+      }
+      .tippy-box {
+        position: relative;
+        background-color: #333;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 1.4;
+        white-space: normal;
+        outline: 0;
+        transition-property: transform, visibility, opacity;
+      }
+      .tippy-box[data-placement^="top"] > .tippy-arrow {
+        bottom: 0;
+      }
+      .tippy-box[data-placement^="top"] > .tippy-arrow:before {
+        bottom: -7px;
+        left: 0;
+        border-width: 8px 8px 0;
+        border-top-color: initial;
+        transform-origin: center top;
+      }
+      .tippy-box[data-placement^="bottom"] > .tippy-arrow {
+        top: 0;
+      }
+      .tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+        top: -7px;
+        left: 0;
+        border-width: 0 8px 8px;
+        border-bottom-color: initial;
+        transform-origin: center bottom;
+      }
+      .tippy-box[data-placement^="left"] > .tippy-arrow {
+        right: 0;
+      }
+      .tippy-box[data-placement^="left"] > .tippy-arrow:before {
+        border-width: 8px 0 8px 8px;
+        border-left-color: initial;
+        right: -7px;
+        transform-origin: center left;
+      }
+      .tippy-box[data-placement^="right"] > .tippy-arrow {
+        left: 0;
+      }
+      .tippy-box[data-placement^="right"] > .tippy-arrow:before {
+        left: -7px;
+        border-width: 8px 8px 8px 0;
+        border-right-color: initial;
+        transform-origin: center right;
+      }
+      .tippy-box[data-inertia][data-state="visible"] {
+        transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+      }
+      .tippy-arrow {
+        width: 16px;
+        height: 16px;
+        color: #333;
+      }
+      .tippy-arrow:before {
+        content: "";
+        position: absolute;
+        border-color: transparent;
+        border-style: solid;
+      }
+      .tippy-content {
+        position: relative;
+        padding: 5px 9px;
+        z-index: 1;
+      }
+    </style>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://clippingpathindia.herokuapp.com/assets/favicon-ad4fc126480c55199f8f7e5fc12f8bc2626cb3927bdc63b052897594d33cbfb0.ico"
+    />
+    <title>Create a New Order | Path</title>
+    <meta name="description" content="" />
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta
+      name="csrf-token"
+      content="cgE68fKgpVwVcB5hbD1iuTIc/wCjjqz6F1Po8GoZhfDV8bx+zoBNOlfPWdHqLsC50s4tL3bHp3MvKw85Fl/7Eg=="
+    />
+
+    <link rel="stylesheet" href="test.css" />
+
+    <!-- GOOGLE ANALYTICS -->
+    <script
+      type="text/javascript"
+      async=""
+      src="https://www.google-analytics.com/analytics.js"
+    ></script>
+    <script
+      src="https://www.googletagmanager.com/gtag/js?id=UA-17162541-1"
+      async="async"
+    ></script>
+    <!-- END OF GOOGLE TAG MANAGER -->
+
+    <script>
+      var shopify_proxy_path = "/a/portal";
+    </script>
+
+    <script>
+      var customer = true;
+      var customer_id = "5494064185429";
+      var chmac =
+        "109091488f53450c847bb590a166d92ced4383aff290d9c33e16aeb9e06ff052@5494064185429";
+      var customer_name = "Johan David";
+      var customer_email = "buyreallike@gmail.com";
+    </script>
+
+    <!--HELPSCOUT BEACON-->
+    <!--END OF HELPSCOUT BEACON-->
+
+    <script
+      src="https://clippingpathindia.herokuapp.com/assets/application-033af52b36bd0bff04ebae9debabf7da980911f3d655e1623e4a4f8e03681eff.js"
+      data-turbolinks-track="reload"
+    ></script>
+
+    <!-- SHOPIFY CURRENCY SWITCHER
+================================================== -->
+    <script
+      src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/shopify_common-8ea6ac3faf357236a97f5de749df4da6e8436ca107bc3a4ee805cbf08bc47392.js"
+      type="text/javascript"
+    ></script>
+
+    <script
+      src="//cdn.shopify.com/s/javascripts/currencies.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="//cdn.shopify.com/s/files/1/1859/8979/t/4/assets/jquery.currencies.min.js?v=9928238296169384236"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      $(document).on("turbolinks:load", function () {
+        Currency.format = "money_format";
+
+        var shopCurrency = "USD";
+
+        /* Sometimes merchants change their shop currency, let's tell our JavaScript file */
+        Currency.moneyFormats[shopCurrency].money_with_currency_format =
+          "${{amount}} USD";
+        Currency.moneyFormats[shopCurrency].money_format = "${{amount}}";
+
+        /* Default currency */
+        var defaultCurrency = "USD";
+
+        /* Cookie currency */
+        var cookieCurrency = Currency.cookie.read();
+
+        /* Fix for customer account pages */
+        $(".money .money").each(function () {
+          $(this).parents(".money").removeClass("money");
+        });
+
+        /* Saving the current price */
+        $(".money").each(function () {
+          $(this).attr("data-currency-USD", $(this).html());
+        });
+
+        var $picker = $('[name="currencies"]');
+
+        // If there's no cookie.
+        if (cookieCurrency == null) {
+          if (shopCurrency !== defaultCurrency) {
+            Currency.convertAll(shopCurrency, defaultCurrency, ".money");
+          } else {
+            Currency.currentCurrency = defaultCurrency;
+          }
+        }
+        // If the cookie value does not correspond to any value in the currency dropdown.
+        else if (
+          $picker.length &&
+          $picker.find("option[value=" + cookieCurrency + "]").length === 0
+        ) {
+          Currency.currentCurrency = shopCurrency;
+          Currency.cookie.write(shopCurrency);
+        } else if (cookieCurrency === shopCurrency) {
+          Currency.currentCurrency = shopCurrency;
+        } else {
+          Currency.convertAll(shopCurrency, cookieCurrency, ".money");
+        }
+
+        $picker.val(Currency.currentCurrency);
+
+        $(document)
+          .ready(function () {
+            $('[name="currencies"]').val(Currency.currentCurrency);
+          })
+          .on("change", '[name="currencies"]', function (event) {
+            var newCurrency = $(event.target).val();
+            $('[name="currencies"]').val(newCurrency);
+            Currency.convertAll(
+              Currency.currentCurrency,
+              newCurrency,
+              ".money"
+            );
+            $(".selected-currency").text(newCurrency);
+          });
+
+        var original_selectCallback = window.selectCallback;
+        var selectCallback = function (variant, selector) {
+          original_selectCallback(variant, selector);
+          Currency.convertAll(
+            shopCurrency,
+            $('[name="currencies"]').val(),
+            ".money"
+          );
+          $(".selected-currency").text(Currency.currentCurrency);
+        };
+
+        $("body").on("ajaxCart.afterCartLoad", function (cart) {
+          Currency.convertAll(
+            shopCurrency,
+            $('[name="currencies"]').val(),
+            ".money"
+          );
+          $(".selected-currency").text(Currency.currentCurrency);
+        });
+
+        $(".selected-currency").text(Currency.currentCurrency);
+      });
+    </script>
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <script>
+      $(document).ready(function () {
+        // With the above scripts loaded, you can call `tippy()` with a CSS
+        // selector and a `content` prop:
+        tippy(".currency-tooltip", {
+          theme: "path",
+          allowHTML: true,
+        });
+      });
+    </script>
+
+    <!--SATISMETER-->
+    <script>
+      document.addEventListener("turbolinks:load", function (event) {
+        (function () {
+          window.satismeter =
+            window.satismeter ||
+            function () {
+              (window.satismeter.q = window.satismeter.q || []).push(arguments);
+            };
+          window.satismeter.l = 1 * new Date();
+          var script = document.createElement("script");
+          var parent = document.getElementsByTagName("script")[0].parentNode;
+          script.async = 1;
+          script.src = "https://app.satismeter.com/satismeter.js";
+          parent.appendChild(script);
+        })();
+        satismeter({
+          writeKey: "oZjRvmxzrjwNSedo",
+          userId: "5494064185429",
+          // forceSurvey: true
+        });
+      });
+    </script>
+    <!--END OF SATISMETER-->
+
+    <!-- FRESHMARKETER -->
+    <script src="//cdn.freshmarketer.com/252110/876708.js"></script>
+
+    <link
+      rel="canonical"
+      href="https://pathedits.com/a/portal/quotations/template/axtdpuzpzk1q_4ofwmnlja"
+    />
+    <script async="" src="https://app.satismeter.com/satismeter.js"></script>
+  </head>
+
+  <body class="d-flex flex-column">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- FLASH NOTICES
+		================================================== -->
+
+    <!-- CURRENCY PICKER
+		================================================== -->
+    <div class="container">
+      <div class="row mt-3 mb-2">
+        <div class="col">
+          <div class="form-inline float-right">
+            <div class="form-group">
+              <label class="my-1 mr-2" for="currencies">Pick a currency</label>
+              <select
+                class="currency-picker custom-select form-control"
+                name="currencies"
+                id="currencies"
+              >
+                <option value="USD" selected="selected">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="AUD">AUD</option>
+                <option value="ANG">ANG</option>
+                <option value="CAD">CAD</option>
+                <option value="SEK">SEK</option>
+                <option value="DKK">DKK</option>
+                <option value="NZD">NZD</option>
+                <option value="BRL">BRL</option>
+                <option value="CHF">CHF</option>
+                <option value="ATS">ATS</option>
+                <option value="NOK">NOK</option>
+                <option value="HKD">HKD</option>
+                <option value="ILS">ILS</option>
+                <option value="ZAR">ZAR</option>
+                <option value="SGD">SGD</option>
+                <option value="HUF">HUF</option>
+                <option value="CZK">CZK</option>
+                <option value="ARS">ARS</option>
+                <option value="DOP">DOP</option>
+                <option value="AED">AED</option>
+                <option value="SIT">SIT</option>
+                <option value="MXN">MXN</option>
+                <option value="RUB">RUB</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEADER AND MAIN
+		================================================== -->
+
+    <!-- ALERT MESSAGE ON ALL PAGES
+		================================================== -->
+
+    <!-- HEADER
+================================================== -->
+    <header class="section section_header mb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <!-- Heading -->
+            <h1 class="section__heading text-uppercase text-center">
+              Create a new order
+            </h1>
+
+            <!-- Subheading -->
+            <p class="section__excerpt mb-4 text-center">
+              First, adjust the settings to get a final price. Then we'll take
+              you to place your order.
+            </p>
+          </div>
+        </div>
+        <!-- / .row -->
+      </div>
+      <!-- / .container -->
+    </header>
+
+    <!-- QUOTE
+================================================== -->
+    <main class="section section_quote_new_order mb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <!-- Form -->
+            <form
+              class="quote_preview_form"
+              action="/a/portal/quotations/update/AxtDpUZPZK1q_4OFWmNlJA?chmac=da5b4146a28b1c3088c895fe0daac8c443c39e348d5375d702e9f2052c8ae6db@583872708693"
+              accept-charset="UTF-8"
+              data-remote="true"
+              method="post"
+            >
+              <input name="utf8" type="hidden" value="✓" />
+              <input
+                type="hidden"
+                name="quotation[line_items]"
+                id="quotation_line_items"
+                value='[{"product_id":240210051083,"variant_id":2068241022987,"title":"Clipping path","handle":"clipping-path_c3","sku":"CLIPPING-PATH_C3_24H","price":"1.29","quantity":"0"},{"product_id":241004675083,"variant_id":2074726596619,"title":"Dust, spot and scratch removal","handle":"dust-spot-scratch-removal_c2","sku":"DUST-SPOT-SCRATCH-REMOVAL_C2_24H","price":"2.49","quantity":"0"}]'
+              />
+              <input
+                type="hidden"
+                name="quotation[total_price]"
+                id="quotation_total_price"
+                value="0.00"
+              />
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Turnaround -->
+                  <div class="form-group">
+                    <label for="trunaround"
+                      >When do you need the edited images back?*
+                      <i
+                        class="icon-info-with-circle"
+                        data-toggle="tooltip"
+                        data-container="body"
+                        title=""
+                        data-original-title="The percentage below displays how much the price will change."
+                      ></i
+                    ></label>
+                    <div class="col-12">
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio6"
+                          value="6"
+                          class="custom-control-input turnaround"
+                        />
+                        <label class="custom-control-label" for="radio6">
+                          6 hrs
+                          <br />
+                          <span class="text-warning small">+100%</span>
+                        </label>
+                      </div>
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio12"
+                          value="12"
+                          class="custom-control-input turnaround"
+                        />
+                        <label class="custom-control-label" for="radio12">
+                          12 hrs
+                          <br />
+                          <span class="text-warning small">+50%</span>
+                        </label>
+                      </div>
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio24"
+                          value="24"
+                          class="custom-control-input turnaround"
+                          checked="checked"
+                        />
+                        <label class="custom-control-label" for="radio24">
+                          24 hrs
+                          <br />
+                          <span class="text-warning small"></span>
+                        </label>
+                      </div>
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio48"
+                          value="48"
+                          class="custom-control-input turnaround"
+                        />
+                        <label class="custom-control-label" for="radio48">
+                          48 hrs
+                          <br />
+                          <span class="text-success small">-5%</span>
+                        </label>
+                      </div>
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio96"
+                          value="96"
+                          class="custom-control-input turnaround"
+                        />
+                        <label class="custom-control-label" for="radio96">
+                          96 hrs
+                          <br />
+                          <span class="text-success small">-10%</span>
+                        </label>
+                      </div>
+                      <div
+                        class="
+                          custom-control custom-radio custom-control-inline
+                        "
+                      >
+                        <input
+                          type="radio"
+                          name="trunaround"
+                          id="radio168"
+                          value="168"
+                          class="custom-control-input turnaround"
+                        />
+                        <label class="custom-control-label" for="radio168">
+                          96+ hrs
+                          <br />
+                          <span class="text-success small">-10%</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Number of images -->
+                  <div class="form-group">
+                    <label for="quotation_quantity"
+                      >How many images do you need edited?*</label
+                    >
+                    <input
+                      type="number"
+                      name="quotation[quantity]"
+                      id="quotation_quantity"
+                      value=""
+                      class="form-control"
+                      required="required"
+                      min="1"
+                      max="99999"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- / .row -->
+              <div class="row">
+                <div class="col">
+                  <div class="mt-4 mb-5 p-3" style="background-color: #ecf7ff">
+                    <h5>Order summary</h5>
+                    <div class="table-responsive mt-4">
+                      <table class="table border_bottom mb-2">
+                        <thead>
+                          <tr class="small">
+                            <th class="text-left font-weight-light">Service</th>
+                            <th class="text-right font-weight-light">
+                              Quantity
+                            </th>
+                            <th class="text-right font-weight-light">
+                              Price Per Image
+                            </th>
+                            <th class="text-right font-weight-light">
+                              Total price
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!--LOOP START-->
+                          <tr class="line_item">
+                            <!--Service-->
+                            <td class="text-left">
+                              <input
+                                type="hidden"
+                                name="product_id"
+                                id="product_id"
+                                value="240210051083"
+                                class="product_id"
+                              />
+                              <input
+                                type="hidden"
+                                name="variant_id"
+                                id="variant_id"
+                                value="2068241022987"
+                                class="variant_id"
+                              />
+                              <input
+                                type="hidden"
+                                name="default_turnaround_price"
+                                id="default_turnaround_price"
+                                class="default_turnaround_price"
+                                value="1.00"
+                              />
+
+                              <!--PRODUCT IMAGE-->
+                              <div class="float-left">
+                                <img
+                                  src="/s/files/1/1859/8979/products/clipping-path_e3081e12-231f-46af-a120-0867330f891b.png?v=1631083817"
+                                  width="60"
+                                  height="60"
+                                  class="img-thumbnail align-self-center mr-3"
+                                />
+                              </div>
+
+                              <!--PRODUCT TITLES-->
+                              <div class="font-weight-normal">
+                                <span class="product_title">Clipping path</span>
+                                <br />
+                                <!--Delete link-->
+                              </div>
+                            </td>
+                            <!--Quantity-->
+                            <td class="text-right">
+                              <span class="variant_quantity base_quantity"
+                                >0</span
+                              >
+                            </td>
+                            <!--Price-->
+                            <td class="text-right">
+                              <span
+                                class="price money"
+                                data-currency-usd="$0.39 USD"
+                                >$0.39 USD</span
+                              >
+                            </td>
+
+                            <!--Total price-->
+                            <td class="text-right">
+                              <!--LINE ITEM TOTAL PRICE-->
+                              <del class="line_item_total_compare_at_element">
+                                <span
+                                  class="
+                                    money
+                                    text-muted
+                                    small
+                                    line_item_total_compare_at
+                                  "
+                                  data-amount="0.00"
+                                  data-currency-usd="$0.00 USD"
+                                  >$0.00 USD</span
+                                >
+                                <br
+                              /></del>
+                              <span
+                                class="line_item_total money font-weight-normal"
+                                data-amount="0.00"
+                                data-currency-usd="$0.00 USD"
+                                >$0.00 USD</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!--SUBTOTAL-->
+                    <div class="text-right mt-3">
+                      <div class="subtotal_compare_at_element d-none">
+                        <del
+                          ><span
+                            class="money text-muted subtotal_compare_at"
+                            data-currency-usd="$0.00 USD"
+                            >$0.00 USD</span
+                          ><br
+                        /></del>
+                      </div>
+                      <h4 class="mb-3">
+                        Subtotal:
+                        <span
+                          class="subtotal_price money"
+                          data-currency-usd="$0.00 USD"
+                          >$0.00 USD</span
+                        >
+                      </h4>
+                      <div class="subtotal_compare_at_element d-none">
+                        <h6 style="color: green">
+                          Your savings today:
+                          <span
+                            class="total_savings_amount money"
+                            data-currency-usd="$0.00 USD"
+                            >$0.00 USD</span
+                          >
+                        </h6>
+                        <div class="small" style="color: green">
+                          <strong
+                            >Good news! We’ve reduced our prices. Nothing to do
+                            on your end.<br />
+                            Just place your order, sit back and enjoy the
+                            savings.</strong
+                          ><br />
+                          *New prices will be reflected on all new orders for
+                          all new and existing customers.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- / .row -->
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Return file format -->
+                  <div class="form-group">
+                    <label for="quotation_return_file_format"
+                      >Return file format*</label
+                    >
+                    <select
+                      name="quotation[return_file_format]"
+                      id="quotation_return_file_format"
+                      class="custom-select"
+                      required="required"
+                    >
+                      <option value="">Select</option>
+                      <option value="JPEG–custom background">
+                        JPEG–custom background
+                      </option>
+                      <option value="JPEG–original background">
+                        JPEG–original background
+                      </option>
+                      <option value="JPEG–white background">
+                        JPEG–white background
+                      </option>
+                      <option value="PNG–custom background">
+                        PNG–custom background
+                      </option>
+                      <option value="PNG–transparent background">
+                        PNG–transparent background
+                      </option>
+                      <option value="PNG–white background">
+                        PNG–white background
+                      </option>
+                      <option value="PSD–custom background">
+                        PSD–custom background
+                      </option>
+                      <option value="PSD–layer mask">PSD–layer mask</option>
+                      <option value="PSD–original background">
+                        PSD–original background
+                      </option>
+                      <option value="PSD–transparent background">
+                        PSD–transparent background
+                      </option>
+                      <option selected="selected" value="PSD–white background">
+                        PSD–white background
+                      </option>
+                      <option value="TIFF–custom background">
+                        TIFF–custom background
+                      </option>
+                      <option value="TIFF–layer mask">TIFF–layer mask</option>
+                      <option value="TIFF–original background">
+                        TIFF–original background
+                      </option>
+                      <option value="TIFF–transparent background">
+                        TIFF–transparent background
+                      </option>
+                      <option value="TIFF–white background">
+                        TIFF–white background
+                      </option>
+                      <option value="Others">Others</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6"></div>
+              </div>
+              <!-- / .row -->
+              <div class="row d-none" id="image-size-fields">
+                <div class="col-md-6">
+                  <!-- Width -->
+                  <div class="form-group">
+                    <label for="quotation_image_width">Width</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      <input
+                        type="number"
+                        name="quotation[image_width]"
+                        id="quotation_image_width"
+                        class="form-control"
+                        min="50"
+                        max="9999"
+                      />
+                      <div class="input-group-append">
+                        <span class="input-group-text">px</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Height -->
+                  <div class="form-group">
+                    <label for="quotation_image_height">Height</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                      <input
+                        type="number"
+                        name="quotation[image_height]"
+                        id="quotation_image_height"
+                        class="form-control"
+                        min="50"
+                        max="9999"
+                      />
+                      <div class="input-group-append">
+                        <span class="input-group-text">px</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- / .row -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Extras -->
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        name="quotation[set_margin]"
+                        id="quotation_set_margin"
+                        class="custom-control-input"
+                        checked="checked"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- / .row -->
+
+              <div class="row">
+                <div class="col"></div>
+              </div>
+              <!-- / .row -->
+              <div class="row">
+                <div class="col">
+                  <!-- Total -->
+                  <div class="text-right mt-3">
+                    <input
+                      type="submit"
+                      name="commit"
+                      value="Order Now"
+                      class="btn btn-primary add_update_cart_button"
+                      data-disable-with="ADD TO CART"
+                    />
+                  </div>
+                </div>
+              </div>
+              <!-- / .row -->
+            </form>
+          </div>
+        </div>
+        <!-- / .row -->
+      </div>
+      <!-- / .container -->
+    </main>
+    <script>
+      //var quotation_id		= "";
+      var template_id = 8050;
+      var sample_image = "";
+      var products = [
+        {
+          id: 240210051083,
+          title: "Clipping path",
+          body_html: "",
+          vendor: "Clipping Path India",
+          product_type: "Paid service",
+          created_at: "2017-11-30T15:35:25Z",
+          handle: "clipping-path_c3",
+          updated_at: "2021-11-27T08:40:08Z",
+          published_at: "2017-11-30T15:35:25Z",
+          template_suffix: "",
+          status: "active",
+          published_scope: "web",
+          tags: "Category 3",
+          admin_graphql_api_id: "gid://shopify/Product/240210051083",
+          variants: [
+            {
+              id: 2068240957451,
+              title: "6 hours",
+              price: "0.54",
+              sku: "CLIPPING-PATH_C3_6H",
+              position: 1,
+              inventory_policy: "deny",
+              compare_at_price: "0.78",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "6 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-11-26T10:26:01Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105415691,
+              inventory_quantity: -7674,
+              old_inventory_quantity: -7674,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068240957451",
+            },
+            {
+              id: 2068240990219,
+              title: "12 hours",
+              price: "0.40",
+              sku: "CLIPPING-PATH_C3_12H",
+              position: 2,
+              inventory_policy: "deny",
+              compare_at_price: "0.59",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "12 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-11-25T05:08:25Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105448459,
+              inventory_quantity: -34748,
+              old_inventory_quantity: -34748,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068240990219",
+            },
+            {
+              id: 2068241022987,
+              title: "24 hours",
+              price: "0.27",
+              sku: "CLIPPING-PATH_C3_24H",
+              position: 3,
+              inventory_policy: "deny",
+              compare_at_price: "0.39",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "24 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-11-27T00:21:15Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105481227,
+              inventory_quantity: -213503,
+              old_inventory_quantity: -213503,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068241022987",
+            },
+            {
+              id: 2068241055755,
+              title: "48 hours",
+              price: "0.26",
+              sku: "CLIPPING-PATH_C3_48H",
+              position: 4,
+              inventory_policy: "deny",
+              compare_at_price: "0.38",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "48 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-11-26T14:07:32Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105513995,
+              inventory_quantity: -53504,
+              old_inventory_quantity: -53504,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068241055755",
+            },
+            {
+              id: 2068241088523,
+              title: "96 hours",
+              price: "0.24",
+              sku: "CLIPPING-PATH_C3_96H",
+              position: 5,
+              inventory_policy: "deny",
+              compare_at_price: "0.35",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "96 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-11-26T20:09:30Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105546763,
+              inventory_quantity: -47316,
+              old_inventory_quantity: -47316,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068241088523",
+            },
+            {
+              id: 2068241121291,
+              title: "96+ hours",
+              price: "0.24",
+              sku: "CLIPPING-PATH_C3_168H",
+              position: 6,
+              inventory_policy: "deny",
+              compare_at_price: "0.35",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "96+ hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T15:35:26Z",
+              updated_at: "2021-09-29T00:32:36Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2086105579531,
+              inventory_quantity: -16169,
+              old_inventory_quantity: -16169,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2068241121291",
+            },
+          ],
+          options: [
+            {
+              id: 300010995723,
+              product_id: 240210051083,
+              name: "Turnaround",
+              position: 1,
+              values: [
+                "6 hours",
+                "12 hours",
+                "24 hours",
+                "48 hours",
+                "96 hours",
+                "96+ hours",
+              ],
+            },
+          ],
+          images: [
+            {
+              id: 651047960587,
+              position: 1,
+              created_at: "2017-11-30T15:37:06Z",
+              updated_at: "2021-09-08T06:50:17Z",
+              alt: null,
+              width: 200,
+              height: 200,
+              src: "/s/files/1/1859/8979/products/clipping-path_e3081e12-231f-46af-a120-0867330f891b.png?v=1631083817",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/651047960587",
+            },
+            {
+              id: 28441691619413,
+              position: 2,
+              created_at: "2021-09-08T06:50:38Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_1_after.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691619413",
+            },
+            {
+              id: 28441691455573,
+              position: 3,
+              created_at: "2021-09-08T06:50:37Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_1_before.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691455573",
+            },
+            {
+              id: 28441691390037,
+              position: 4,
+              created_at: "2021-09-08T06:50:36Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_2_after.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691390037",
+            },
+            {
+              id: 28441691422805,
+              position: 5,
+              created_at: "2021-09-08T06:50:36Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_2_before.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691422805",
+            },
+            {
+              id: 28441691553877,
+              position: 6,
+              created_at: "2021-09-08T06:50:37Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_3_after.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691553877",
+            },
+            {
+              id: 28441691521109,
+              position: 7,
+              created_at: "2021-09-08T06:50:37Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_3_before.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691521109",
+            },
+            {
+              id: 28441691488341,
+              position: 8,
+              created_at: "2021-09-08T06:50:37Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_4_after.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691488341",
+            },
+            {
+              id: 28441691586645,
+              position: 9,
+              created_at: "2021-09-08T06:50:37Z",
+              updated_at: "2021-10-04T18:04:26Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/clipping_path-category_3-sample_4_before.jpg?v=1633370666",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441691586645",
+            },
+          ],
+          image: {
+            id: 651047960587,
+            position: 1,
+            created_at: "2017-11-30T15:37:06Z",
+            updated_at: "2021-09-08T06:50:17Z",
+            alt: null,
+            width: 200,
+            height: 200,
+            src: "/s/files/1/1859/8979/products/clipping-path_e3081e12-231f-46af-a120-0867330f891b.png?v=1631083817",
+            variant_ids: [],
+            admin_graphql_api_id: "gid://shopify/ProductImage/651047960587",
+          },
+        },
+        {
+          id: 241004675083,
+          title: "Dust, spot and scratch removal",
+          body_html: "",
+          vendor: "Clipping Path India",
+          product_type: "Paid service",
+          created_at: "2017-11-30T19:21:36Z",
+          handle: "dust-spot-scratch-removal_c2",
+          updated_at: "2021-11-26T22:35:15Z",
+          published_at: "2017-11-30T19:21:36Z",
+          template_suffix: "",
+          status: "active",
+          published_scope: "web",
+          tags: "Category 2",
+          admin_graphql_api_id: "gid://shopify/Product/241004675083",
+          variants: [
+            {
+              id: 2074726531083,
+              title: "6 hours",
+              price: "4.98",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_6H",
+              position: 1,
+              inventory_policy: "deny",
+              compare_at_price: "5.98",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "6 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-11-26T20:06:00Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610650123,
+              inventory_quantity: -820,
+              old_inventory_quantity: -820,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726531083",
+            },
+            {
+              id: 2074726563851,
+              title: "12 hours",
+              price: "3.74",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_12H",
+              position: 2,
+              inventory_policy: "deny",
+              compare_at_price: "4.49",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "12 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-11-25T17:15:07Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610682891,
+              inventory_quantity: -2687,
+              old_inventory_quantity: -2687,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726563851",
+            },
+            {
+              id: 2074726596619,
+              title: "24 hours",
+              price: "2.49",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_24H",
+              position: 3,
+              inventory_policy: "deny",
+              compare_at_price: "2.99",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "24 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-11-26T20:30:41Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610715659,
+              inventory_quantity: -19778,
+              old_inventory_quantity: -19778,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726596619",
+            },
+            {
+              id: 2074726629387,
+              title: "48 hours",
+              price: "2.37",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_48H",
+              position: 4,
+              inventory_policy: "deny",
+              compare_at_price: "2.84",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "48 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-11-25T15:01:30Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610748427,
+              inventory_quantity: -2516,
+              old_inventory_quantity: -2516,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726629387",
+            },
+            {
+              id: 2074726662155,
+              title: "96 hours",
+              price: "2.24",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_96H",
+              position: 5,
+              inventory_policy: "deny",
+              compare_at_price: "2.69",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "96 hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-11-26T20:09:19Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610781195,
+              inventory_quantity: -2572,
+              old_inventory_quantity: -2572,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726662155",
+            },
+            {
+              id: 2074726694923,
+              title: "96+ hours",
+              price: "2.24",
+              sku: "DUST-SPOT-SCRATCH-REMOVAL_C2_168H",
+              position: 6,
+              inventory_policy: "deny",
+              compare_at_price: "2.69",
+              fulfillment_service: "manual",
+              inventory_management: null,
+              option1: "96+ hours",
+              option2: null,
+              option3: null,
+              created_at: "2017-11-30T19:21:36Z",
+              updated_at: "2021-10-18T11:32:40Z",
+              taxable: true,
+              barcode: null,
+              grams: 0,
+              image_id: null,
+              weight: 0.0,
+              weight_unit: "lb",
+              inventory_item_id: 2092610813963,
+              inventory_quantity: -2419,
+              old_inventory_quantity: -2419,
+              requires_shipping: false,
+              admin_graphql_api_id:
+                "gid://shopify/ProductVariant/2074726694923",
+            },
+          ],
+          options: [
+            {
+              id: 300965593099,
+              product_id: 241004675083,
+              name: "Turnaround",
+              position: 1,
+              values: [
+                "6 hours",
+                "12 hours",
+                "24 hours",
+                "48 hours",
+                "96 hours",
+                "96+ hours",
+              ],
+            },
+          ],
+          images: [
+            {
+              id: 653423509515,
+              position: 1,
+              created_at: "2017-11-30T19:34:42Z",
+              updated_at: "2021-09-08T06:19:47Z",
+              alt: null,
+              width: 200,
+              height: 200,
+              src: "/s/files/1/1859/8979/products/photoshop-retouching_6b73b996-b9d5-4c33-b2c2-63e177c58c07.png?v=1631081987",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/653423509515",
+            },
+            {
+              id: 28441670418517,
+              position: 2,
+              created_at: "2021-09-08T06:20:10Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_1_after.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670418517",
+            },
+            {
+              id: 28441670287445,
+              position: 3,
+              created_at: "2021-09-08T06:20:10Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_1_before.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670287445",
+            },
+            {
+              id: 28441670385749,
+              position: 4,
+              created_at: "2021-09-08T06:20:10Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_4_after.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670385749",
+            },
+            {
+              id: 28441670484053,
+              position: 5,
+              created_at: "2021-09-08T06:20:11Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_4_before.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670484053",
+            },
+            {
+              id: 28441670352981,
+              position: 6,
+              created_at: "2021-09-08T06:20:10Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_2_after.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670352981",
+            },
+            {
+              id: 28441670516821,
+              position: 7,
+              created_at: "2021-09-08T06:20:11Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_2_before.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670516821",
+            },
+            {
+              id: 28441670451285,
+              position: 8,
+              created_at: "2021-09-08T06:20:11Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_3_after.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670451285",
+            },
+            {
+              id: 28441670320213,
+              position: 9,
+              created_at: "2021-09-08T06:20:10Z",
+              updated_at: "2021-10-04T18:11:49Z",
+              alt: null,
+              width: 732,
+              height: 732,
+              src: "/s/files/1/1859/8979/products/photoshop_retouching-category_spot_2-sample_3_before.jpg?v=1633371109",
+              variant_ids: [],
+              admin_graphql_api_id: "gid://shopify/ProductImage/28441670320213",
+            },
+          ],
+          image: {
+            id: 653423509515,
+            position: 1,
+            created_at: "2017-11-30T19:34:42Z",
+            updated_at: "2021-09-08T06:19:47Z",
+            alt: null,
+            width: 200,
+            height: 200,
+            src: "/s/files/1/1859/8979/products/photoshop-retouching_6b73b996-b9d5-4c33-b2c2-63e177c58c07.png?v=1631081987",
+            variant_ids: [],
+            admin_graphql_api_id: "gid://shopify/ProductImage/653423509515",
+          },
+        },
+      ];
+      var turnarounds = [
+        {
+          id: 1,
+          name: "6 hrs",
+          handle: "6",
+          multiplier: "2.0",
+          created_at: "2017-09-22T09:47:02.636Z",
+          updated_at: "2021-11-19T06:00:24.015Z",
+          available_at_price: 50,
+        },
+        {
+          id: 2,
+          name: "12 hrs",
+          handle: "12",
+          multiplier: "1.5",
+          created_at: "2017-09-22T09:47:02.647Z",
+          updated_at: "2021-11-19T06:00:24.023Z",
+          available_at_price: 100,
+        },
+        {
+          id: 3,
+          name: "24 hrs",
+          handle: "24",
+          multiplier: "1.0",
+          created_at: "2017-09-22T09:47:02.653Z",
+          updated_at: "2021-11-02T12:49:45.010Z",
+          available_at_price: 1000,
+        },
+        {
+          id: 4,
+          name: "48 hrs",
+          handle: "48",
+          multiplier: "0.95",
+          created_at: "2017-09-22T09:47:02.665Z",
+          updated_at: "2021-04-27T17:05:31.756Z",
+          available_at_price: 1250,
+        },
+        {
+          id: 5,
+          name: "96 hrs",
+          handle: "96",
+          multiplier: "0.9",
+          created_at: "2017-09-22T09:47:02.673Z",
+          updated_at: "2021-04-27T17:05:31.766Z",
+          available_at_price: 1700,
+        },
+        {
+          id: 6,
+          name: "96+ hrs",
+          handle: "168",
+          multiplier: "0.9",
+          created_at: "2017-09-22T09:47:02.681Z",
+          updated_at: "2021-04-27T17:05:31.775Z",
+          available_at_price: 0,
+        },
+      ];
+    </script>
+
+    <div></div>
+  </body>
+</html>
